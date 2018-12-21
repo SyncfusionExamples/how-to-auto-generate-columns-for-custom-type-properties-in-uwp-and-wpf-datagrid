@@ -1,0 +1,25 @@
+﻿<Window x:Class="DetailsView_NestedLevel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:linq="clr-namespace:Syncfusion.Data;assembly=Syncfusion.Data.WPF"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DetailsView_NestedLevel"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        >
+    <Window.Resources>
+        <local:CustomComparer x:Key="CustomSortComparer"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
+    <Grid>
+<syncfusion:SfDataGrid ItemsSource="{Binding Source}" x:Name="dataGrid"
+                        AutoGenerateColumnsForCustomType="True"
+                        AutoGenerateColumnsModeForCustomType="Parent"
+                        AllowEditing="True"
+                        AllowFiltering="True" 
+                        AllowSorting="True" 
+                        ShowGroupDropArea="True"
+                        ColumnSizer="Star" >
+</syncfusion:SfDataGrid>
+    </Grid>
+</Window>

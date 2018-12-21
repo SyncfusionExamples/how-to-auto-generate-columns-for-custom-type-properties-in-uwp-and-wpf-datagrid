@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="SfDataGridDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SfDataGridDemo"
+    xmlns:linq="using:Syncfusion.Data"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Grid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <local:CustomComparer x:Key="CustomSortComparer"/>
+    </Page.Resources>
+    <Page.DataContext>
+        <local:ViewModel />
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>-->
+        <syncfusion:SfDataGrid ItemsSource="{Binding Source}" AllowEditing="True" Grid.Column="0"
+                               AllowFiltering="True" x:Name="dataGrid" AutoGenerateColumnsForCustomType="True"
+                               AllowSorting="True" AddNewRowInitiating="dataGrid_AddNewRowInitiating" 
+                               AutoGenerateColumnsModeForCustomType="Both"
+                               GridCopyOption="CopyData" GridPasteOption="PasteData"
+                               AddNewRowPosition="FixedTop" FilterRowPosition="FixedTop" 
+                               ShowGroupDropArea="True" 
+                               ColumnSizer="Star" >
+            <syncfusion:SfDataGrid.SortComparers>
+                <linq:SortComparer Comparer="{StaticResource CustomSortComparer}" PropertyName="OrderInfo" />
+            </syncfusion:SfDataGrid.SortComparers>
+
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridNumericColumn MappingName="OrderID"/>
+                <syncfusion:GridTextColumn MappingName="OrderInfo">
+                    <syncfusion:GridTextColumn.CellStyle>
+                        <Style TargetType="syncfusion:GridCell">
+                            <Setter Property="Background" Value="Aquamarine"/>
+                        </Style>
+                    </syncfusion:GridTextColumn.CellStyle>
+                </syncfusion:GridTextColumn>
+
+                <syncfusion:GridTemplateColumn MappingName="OrderInfo.Quantity" UseBindingValue="True">
+                    <syncfusion:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding OrderInfo.Quantity}"/>
+                        </DataTemplate>
+                    </syncfusion:GridTemplateColumn.CellTemplate>
+                    <syncfusion:GridTemplateColumn.EditTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding OrderInfo.Quantity}"/>
+                        </DataTemplate>
+                    </syncfusion:GridTemplateColumn.EditTemplate>
+                </syncfusion:GridTemplateColumn>
+                <syncfusion:GridTextColumn MappingName="ShippersInfo"/>
+                <syncfusion:GridTextColumn MappingName="ShippersInfo[0].ShipperID" UseBindingValue="True"/>
+            </syncfusion:SfDataGrid.Columns>
+
+        </syncfusion:SfDataGrid>
+        <!--<Button x:Name="button" Content="Apply Sorting" Click="button_Click" Grid.Column="1"/>-->
+    </Grid>
+</Page>
